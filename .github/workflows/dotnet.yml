@@ -1,28 +1,24 @@
-name: .NET CI
+name: CI
 
+# Запускать при пушах и ПР в основную ветку
 on:
   push:
-    branches: [ "main", "task01" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-   
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
+      - uses: actions/checkout@v4
 
-    - name: Restore dependencies
-      run: dotnet restore practice2026.sln
+      
+      # 1. Проверка форматирования
+      - name: Check formatting
+        run: make check-format
 
-    - name: Build
-      run: dotnet build practice2026.sln --no-restore
-
-    - name: Test
-      run: dotnet test practice2026.sln --no-build --verbosity normal
+      # 2. Запуск тестов
+      - name: Run tests
+        run: make test
