@@ -2,7 +2,7 @@ name: .NET CI
 
 on:
   push:
-    branches: [ "main", "task01", "task02" ]
+    branches: [ "main", "task*" ] # Будет запускаться на ветках main, task01, task02 и т.д.
   pull_request:
     branches: [ "main" ]
 
@@ -18,11 +18,18 @@ jobs:
       with:
         dotnet-version: 8.0.x
 
-    - name: Restore dependencies
-      run: dotnet restore 
-
-    - name: Build
-      run: dotnet build --no-restore
-
-    - name: Test
-      run: dotnet --no-build --verbosity normal
+    # Этот скрипт сам находит все папки с .sln файлами и тестирует их
+     Wilk-run: |
+      echo "Ищем все файлы решений (.sln) в репозитории..."
+     
+      # Находим все файлы .sln и запускаем для каждого цикл
+      find . -name "*.sln" | while read solution; do
+        echo "--------------------------------------------------"
+        echo "Найдено решение: $solution"
+        echo "--------------------------------------------------"
+       
+        # Восстанавливаем зависимости, собираем и тестируем
+        dotnet restore "$solution"
+        dotnet build "$solution" --no-restore
+        dotnet test "$solution" --no-build --verbosity normal
+      done
