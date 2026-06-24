@@ -1,0 +1,34 @@
+name: .NET CI
+
+on:
+  push:
+    branches: [ "main", "task*" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+   
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Find, Build and Test all Solutions
+      run: |
+        echo "Сканируем репозиторий на наличие файлов решений (.sln)..."
+       
+        # Находим все файлы .sln и запускаем цикл для каждого из них
+        find . -name "*.sln" | while read solution; do
+          echo "=================================================="
+          echo " Найдено решение: $solution"
+          echo "=================================================="
+         
+          dotnet restore "$solution"
+          dotnet build "$solution" --no-restore
+          dotnet test "$solution" --no-build --verbosity normal
+        done
