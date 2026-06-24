@@ -19,10 +19,10 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: Restore dependencies
-      run: dotnet restore practice2026.sln
+      run: dotnet restore 
 
     - name: Build
-      run: dotnet build practice2026.sln --no-restore
+      run: dotnet build --no-restore
 
     - name: Test
-      run: dotnet test practice2026.sln --no-build --verbosity normal
+      run: dotnet --no-build --verbosity normal
