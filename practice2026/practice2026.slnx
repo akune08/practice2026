@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="ConsoleApp1/ConsoleApp1.csproj" Id="143aa4d5-c2bd-485f-86f6-01e9585136da" />
   <Project Path="task07/task07.csproj" />
   <Project Path="task07tests/task07tests.csproj" />
 </Solution>
