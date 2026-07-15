@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="CommandProcessor/CommandProcessor.csproj" Id="78b12e91-6a3e-436e-89cf-f0bf8feb1995" />
+  <Project Path="practice2026/ICommand.csproj" />
+  <Project Path="task17/HardStop &amp; SoftStop.csproj" />
+  <Project Path="task17tests/task18tests.csproj" />
+  <Project Path="task18/RoundRobin.csproj" Id="e991b3ec-ff7d-4150-9b1b-aa195e40a44c" />
+</Solution>
